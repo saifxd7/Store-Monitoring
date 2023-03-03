@@ -11,6 +11,18 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+import environ
+
+env = environ.Env(
+    SQL_DATABASE=str,
+    SQL_USER=str,
+    SQL_PASSWORD=str,
+    SQL_HOST=str,
+    SQL_PORT=str,
+)
+
+environ.Env.read_env(os.path.join(os.path.dirname(
+    os.path.abspath(__file__)), '..') + '/.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -79,6 +91,16 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": 'django.db.backends.postgresql',
+#         "NAME": env("POSTGRES_DB"),
+#         "USER": env("POSTGRES_USER"),
+#         "PASSWORD": env("POSTGRES_PASSWORD"),
+#         "HOST": env("POSTGRES_HOST"),
+#         "PORT": env("POSTGRES_PORT"),
+#     }
+# }
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",

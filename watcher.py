@@ -1,7 +1,6 @@
 import os
 import time
-
-from django.core.management import call_command
+import subprocess
 
 WATCH_DIR = "/app/incoming_files"
 
@@ -18,11 +17,34 @@ def watch_directory():
                 filepath = os.path.join(WATCH_DIR, filename)
                 print(f"New file detected: {filepath}")
 
-                # Process the file using a Django management command
-                call_command('import_data', f'{WATCH_DIR}/store.csv', 'Store')
+                # Process the file using subprocess
+                subprocess.run(
+                    ["python", "manage.py", "import_data", filepath, "Store"])
 
                 # Delete the file from the incoming folder
                 os.remove(filepath)
+
+            elif filename == "store_status.csv":
+                filepath = os.path.join(WATCH_DIR, filename)
+                print(f"New file detected: {filepath}")
+
+                # Process the file using subprocess
+                subprocess.run(
+                    ["python", "manage.py", "import_data", filepath, "StoreStatus"])
+
+                # Delete the file from the incoming folder
+                # os.remove(filepath)
+
+            elif filename == "store_hours.csv":
+                filepath = os.path.join(WATCH_DIR, filename)
+                print(f"New file detected: {filepath}")
+
+                # Process the file using subprocess
+                subprocess.run(
+                    ["python", "manage.py", "import_data", filepath, "StoreHours"])
+
+                # Delete the file from the incoming folder
+                # os.remove(filepath)
 
 
 if __name__ == "__main__":
