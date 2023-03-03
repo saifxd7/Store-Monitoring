@@ -56,6 +56,6 @@ class Command(BaseCommand):
         print("Completed")
 
 
-# python manage.py import_data D:\loop\server\incoming_csv\bq-results-20230125-202210-1674678181880.csv Store
+# python manage.py import_data D:\loop\server\incoming_csv\store.csv Store
 # python manage.py import_data D:\loop\server\incoming_csv\store_status.csv StoreStatus
-# python manage.py import_data D:\loop\server\incoming_csv\Menu_hours.csv StoreHours
+# python manage.py import_data D:\loop\server\incoming_csv\store_hours.csv StoreHours
